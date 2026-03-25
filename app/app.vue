@@ -1,26 +1,44 @@
+<script setup lang="ts">
+import type { FormData } from '~/types'
+
+const formData = ref<FormData>({
+  github: '',
+  first: '',
+  last: '',
+  company: '',
+  job: '',
+  pronouns: '',
+})
+
+const screen = useTemplateRef('screen')
+
+function handleCopyToBadge() {
+  screen.value?.copyToBadge()
+}
+</script>
+
 <template>
   <Html>
-    <Body>
+    <Body class="bg-gray-100">
       <NuxtRouteAnnouncer />
-      <main class="min-h-screen bg-gray-100">
+      <main class="min-h-screen">
         <div class="container mx-auto p-4">
           <div class="grid grid-cols-2 gap-8">
-            <div />
+            <!-- form -->
+            <ClientOnly>
+              <Screen
+                ref="screen"
+                v-model:form="formData"
+              />
+            </ClientOnly>
+
             <div class="flex flex-col gap-4 items-center justify-center">
-              <Badge>
-                <template #canvas>
-                  <canvas
-                    ref="badgeCanvas"
-                    width="444"
-                    height="192"
-                    class="mb-4 border-2"
-                  />
-                </template>
-              </Badge>
+              <Badge @copy="handleCopyToBadge" />
             </div>
           </div>
         </div>
       </main>
+      <Footer />
     </Body>
   </Html>
 </template>

@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  /* Code elements use Roboto Mono */
+  code, kbd, samp, pre {
+    @apply font-mono;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+}

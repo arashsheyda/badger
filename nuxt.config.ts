@@ -1,6 +1,12 @@
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
 
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-07-15',
+
+  css: [
+    '~/assets/css/main.css',
+  ],
 
   modules: [
     '@nuxt/eslint',
@@ -13,13 +19,20 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
-  future: {
-    compatibilityVersion: 4,
-  },
-
   eslint: {
     config: {
       stylistic: true,
+    },
+  },
+
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+    optimizeDeps: {
+      include: [
+        '@vueuse/core',
+      ],
     },
   },
 })
