@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BadgeStyle, FormData } from '~/types'
+import type { BadgeStyle, FormData, TextPositions } from '~/types'
 
 const formData = defineModel<any>('form', {
   required: true,
@@ -11,20 +11,33 @@ const badgeStyle = defineModel<BadgeStyle>('badgeStyle', {
 
 const badgeCanvas = useTemplateRef('badgeCanvas')
 
+const textPositions = useCookie<TextPositions>('badger-positions', {
+  maxAge: 60 * 60 * 24 * 365,
+  default: () => ({}),
+})
+
+const hasCustomPositions = computed(() => Object.keys(textPositions.value).length > 0)
+
 const { contributionData, handleGitHubInput, fetchContributions, loading } = useGitHub(
   formData,
   badgeStyle,
   () => drawBadge(),
 )
 
-const { drawBadge, init } = useBadgeCanvas(
+const { drawBadge, init, setupDrag, teardownDrag } = useBadgeCanvas(
   badgeCanvas,
   formData,
   badgeStyle,
   contributionData,
+  textPositions,
 )
 
 const { copyToBadge } = useSerial(badgeCanvas)
+
+function resetLayout() {
+  textPositions.value = {}
+  drawBadge()
+}
 
 function getQueryParams() {
   if (import.meta.client) {
@@ -71,8 +84,14 @@ watch(badgeStyle, () => {
 
 onMounted(async () => {
   await init()
+  setupDrag()
   loadInitialData()
   window.addEventListener('resize', drawBadge)
+})
+
+onBeforeUnmount(() => {
+  teardownDrag()
+  window.removeEventListener('resize', drawBadge)
 })
 
 defineExpose({ copyToBadge })
@@ -180,6 +199,19 @@ defineExpose({ copyToBadge })
           >
         </div>
       </template>
+
+      <button
+        v-if="hasCustomPositions"
+        type="button"
+        class="inline-flex items-center gap-1.5 text-xs font-medium text-gray-400 hover:text-gray-600 transition-colors"
+        @click="resetLayout"
+      >
+        <Icon
+          name="i-carbon-reset"
+          class="w-3.5 h-3.5"
+        />
+        Reset layout
+      </button>
     </div>
   </div>
   <Teleport to="#canvas">
