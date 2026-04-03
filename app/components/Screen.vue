@@ -309,66 +309,77 @@ defineExpose({ copyToBadge })
 </script>
 
 <template>
-  <div class="input-section flex-1">
-    <h1 class="text-3xl font-bold mb-6">
-      Badger Press
-    </h1>
-    <div class="space-y-4">
-      <div class="form-group">
-        <label class="block text-sm font-medium text-gray-700 mb-1">GitHub Handle</label>
-        <input
-          v-model="formData.github"
-          type="text"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          @input="handleGitHubInput"
-        >
+  <div class="w-full">
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200/60 p-6 sm:p-8 space-y-5">
+      <h2 class="text-lg font-semibold text-gray-800">
+        Badge Details
+      </h2>
+      <div class="form-group relative">
+        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">GitHub Handle</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+            <Icon name="i-carbon-logo-github" class="w-5 h-5" />
+          </span>
+          <input
+            v-model="formData.github"
+            type="text"
+            placeholder="mona"
+            class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent focus:bg-white"
+            @input="handleGitHubInput"
+          >
+        </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div class="form-group">
-          <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">First Name</label>
           <input
             v-model="formData.first"
             type="text"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Mona"
+            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent focus:bg-white"
             @input="updateFullString"
           >
         </div>
         <div class="form-group">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Last Name</label>
           <input
             v-model="formData.last"
             type="text"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Lisa"
+            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent focus:bg-white"
             @input="updateFullString"
           >
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div class="form-group">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Company</label>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Company</label>
           <input
             v-model="formData.company"
             type="text"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="GitHub"
+            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent focus:bg-white"
             @input="updateFullString"
           >
         </div>
         <div class="form-group">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Job Title</label>
           <input
             v-model="formData.job"
             type="text"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Octocat"
+            class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent focus:bg-white"
             @input="updateFullString"
           >
         </div>
       </div>
       <div class="form-group">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Pronouns</label>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Pronouns</label>
         <input
           v-model="formData.pronouns"
           type="text"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="they/them"
+          class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent focus:bg-white"
           @input="updateFullString"
         >
       </div>

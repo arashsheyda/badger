@@ -1,20 +1,25 @@
 <template>
-  <footer class="fixed bottom-0 left-0 right-0 bg-gray-100 p-4 text-center border-t flex justify-center gap-4">
-    <NuxtLink
-      to="https://github.com/arashsheyda/badger"
-      external
-      class="flex items-center gap-2 text-gray-700 hover:text-gray-900"
-    >
-      <Icon name="i-carbon-logo-github" />
-      View source
-    </NuxtLink>
-    <span class="text-gray-400">|</span>
-    <NuxtLink
-      to="https://viper-ide.org/"
-      external
-      class="text-gray-700 hover:text-gray-900"
-    >
-      Edit code on viper
-    </NuxtLink>
+  <footer class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t border-gray-200/60 py-3 px-4 text-center">
+    <div class="flex items-center justify-center gap-3 text-sm">
+      <NuxtLink
+        to="https://github.com/arashsheyda/badger"
+        external
+        class="inline-flex items-center gap-1.5 text-gray-500 hover:text-gray-900 transition-colors duration-200"
+      >
+        <Icon
+          name="i-carbon-logo-github"
+          class="w-4 h-4"
+        />
+        Source
+      </NuxtLink>
+      <span class="text-gray-300">·</span>
+      <NuxtLink
+        to="https://viper-ide.org/"
+        external
+        class="text-gray-500 hover:text-gray-900 transition-colors duration-200"
+      >
+        Edit on Viper
+      </NuxtLink>
+    </div>
   </footer>
 </template>

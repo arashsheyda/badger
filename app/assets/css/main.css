@@ -11,4 +11,12 @@
   button {
     @apply cursor-pointer;
   }
+
+  body {
+    @apply antialiased;
+  }
+
+  ::selection {
+    @apply bg-gray-900 text-white;
+  }
 }
