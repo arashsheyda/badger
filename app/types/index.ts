@@ -6,3 +6,14 @@ export interface FormData {
   job: string
   pronouns: string
 }
+
+export type BadgeStyle = 'default' | 'contributions' | 'skyline'
+
+export interface BackgroundRenderer {
+  draw: (ctx: CanvasRenderingContext2D, w: number, h: number, options: BackgroundOptions) => void
+}
+
+export interface BackgroundOptions {
+  github: string
+  contributionData: number[]
+}

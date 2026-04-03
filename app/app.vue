@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FormData } from '~/types'
+import type { BadgeStyle, FormData } from '~/types'
 
 const formData = ref<FormData>({
   github: '',
@@ -9,6 +9,8 @@ const formData = ref<FormData>({
   job: '',
   pronouns: '',
 })
+
+const badgeStyle = ref<BadgeStyle>('default')
 
 const screen = useTemplateRef('screen')
 
@@ -37,11 +39,15 @@ function handleCopyToBadge() {
               <Screen
                 ref="screen"
                 v-model:form="formData"
+                v-model:badge-style="badgeStyle"
               />
             </ClientOnly>
 
             <div class="flex flex-col gap-6 items-center justify-start lg:sticky lg:top-8">
-              <Badge @copy="handleCopyToBadge" />
+              <Badge
+                v-model:badge-style="badgeStyle"
+                @copy="handleCopyToBadge"
+              />
             </div>
           </div>
         </div>
