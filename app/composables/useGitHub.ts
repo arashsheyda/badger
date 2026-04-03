@@ -7,12 +7,15 @@ export function useGitHub(
   onUpdate: () => void,
 ) {
   const contributionData = ref<number[]>([])
+  const loading = ref<boolean>(false)
 
   const handleGitHubInput = useDebounceFn(async () => {
     const username = formData.value.github.trim().replace(/^@/, '')
     if (username) {
+      loading.value = true
       const userData = await fetchUser(username)
       applyUserData(userData)
+      loading.value = false
     }
   }, 250)
 
@@ -66,5 +69,10 @@ export function useGitHub(
     }
   }
 
-  return { contributionData, handleGitHubInput, fetchContributions }
+  return {
+    loading,
+    contributionData,
+    handleGitHubInput,
+    fetchContributions,
+  }
 }

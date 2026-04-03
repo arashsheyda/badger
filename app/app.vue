@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import type { BadgeStyle, FormData } from '~/types'
 
-const formData = ref<FormData>({
-  github: '',
+const githubCookie = useCookie<string>('badger-github', {
+  maxAge: 60 * 60 * 24 * 365,
+})
+const badgeStyleCookie = useCookie<BadgeStyle>('badger-style', {
+  maxAge: 60 * 60 * 24 * 365,
+})
+
+const formData = reactive<FormData>({
+  github: githubCookie.value || '',
   first: '',
   last: '',
   company: '',
@@ -10,11 +17,16 @@ const formData = ref<FormData>({
   pronouns: '',
 })
 
-const badgeStyle = ref<BadgeStyle>('default')
+const badgeStyle = ref<BadgeStyle>(badgeStyleCookie.value || 'default')
+
+watchEffect(() => {
+  githubCookie.value = formData.github
+  badgeStyleCookie.value = badgeStyle.value
+})
 
 const screen = useTemplateRef('screen')
 
-function handleCopyToBadge() {
+function handleCopyToBadge(): void {
   screen.value?.copyToBadge()
 }
 </script>
